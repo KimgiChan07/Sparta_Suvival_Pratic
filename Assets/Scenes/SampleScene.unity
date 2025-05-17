@@ -374,6 +374,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  jumpPower: 80
+  cameraContainer: {fileID: 1339500317}
+  minXLook: -85
+  maxXLook: 85
+  lookSensitivity: 0.4
 --- !u!114 &909309944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +434,19 @@ MonoBehaviour:
     m_ActionId: 5e3e657e-1e60-4a14-be6b-030a90143f6d
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 909309943}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b355a3e9-bd2a-417f-9cd6-d765ba79479e
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
@@ -441,7 +458,19 @@ MonoBehaviour:
     m_ActionId: 62fcccd6-ee46-4db5-a0db-a585d91c0324
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 909309943}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1cb8ce6c-905a-4f5a-94c2-b82b85c9fe42
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
