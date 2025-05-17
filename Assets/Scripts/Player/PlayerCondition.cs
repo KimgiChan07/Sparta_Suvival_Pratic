@@ -1,16 +1,25 @@
+using System;
 using UnityEngine;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamageIbe
+{
+    void TakePhysicalDamage(float damage);
+}
+
+
+public class PlayerCondition : MonoBehaviour,  IDamageIbe
 {
     public UIConditoin uIConditoin;
- 
     
     public Condition health{get{return uIConditoin.health;}}
     public Condition hunger{get{return uIConditoin.hunger;}}
     public Condition stamina{get{return uIConditoin.stamina;}}
 
     public float noHungerHealtDecay;
+    private IDamageIbe _damageIbeImplementation;
     
+    public event Action onTakeDamage;
+
     void Update()
     {
         hunger.Subtract(hunger.passiveValue * Time.deltaTime);
@@ -41,5 +50,10 @@ public class PlayerCondition : MonoBehaviour
     {
         Debug.Log("die!!");
     }
-    
+
+    public void TakePhysicalDamage(float damage)
+    {
+        health.Subtract(damage);
+        onTakeDamage?.Invoke();
+    }
 }
