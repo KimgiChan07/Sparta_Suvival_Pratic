@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IDamageIbe
 {
-    void TakePhysicalDamage(float damage);
+    void TakePhysicalDamage(int damage);
 }
 
 
@@ -51,9 +51,19 @@ public class PlayerCondition : MonoBehaviour,  IDamageIbe
         Debug.Log("die!!");
     }
 
-    public void TakePhysicalDamage(float damage)
+    public void TakePhysicalDamage(int damage)
     {
         health.Subtract(damage);
         onTakeDamage?.Invoke();
+    }
+
+    public bool UseStamina(float amount)
+    {
+        if (stamina.curValue - amount < 0f)
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
     }
 }

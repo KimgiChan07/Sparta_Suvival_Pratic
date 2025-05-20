@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     private Vector2 curMovementInput;
 
+    
+    
     [Header("Look")] 
     public Transform cameraContainer;
     public float minXLook;
@@ -17,9 +19,9 @@ public class PlayerController : MonoBehaviour
     public float lookSensitivity; //민감도
     private Vector2 mouseDelta;
     private float camCurXRot;
+    public bool canLook = true;
     
-    
-    
+    public Action inventoryAction;
     private Rigidbody rigid;
 
     private void Awake()
@@ -34,7 +36,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     private void Start()
@@ -110,5 +115,22 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+    
+    //--------------------------------------------------------------------
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            inventoryAction?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    void ToggleCursor()
+    {
+        bool toggle= Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }
